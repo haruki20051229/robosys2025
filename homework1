@@ -1,49 +1,69 @@
+#!/usr/bin/env python3
 import sys
 from fractions import Fraction
 
-def solve(nums, history):
+def solve(nums):
     if len(nums) == 1:
-        if nums[0] == 0:
-            return history
-        return None
+        if nums[0][0] == 0:
+            return nums[0][1]
+        else:
+            return None
 
-    n = len(nums)
-    for i in range(n):
-        for j in range(i + 1, n):
-            a, b = nums[i], nums[j]
-            rest = [nums[k] for k in range(n) if k != i and k != j]
+    for i in range(len(nums)):
+        for j in range(len(nums)):
+            if i == j:
+                continue
 
-            operations = [
-                (a + b, f"({a} + {b})"),
-                (a - b, f"({a} - {b})"),
-                (b - a, f"({b} - {a})"),
-                (a * b, f"({a} * {b})")
-            ]
+            rest = []
+            for k in range(len(nums)):
+                if k != i and k != j:
+                    rest.append(nums[k])
 
-            if b != 0:
-                operations.append((a / b, f"({a} / {b})"))
-            if a != 0:
-                operations.append((b / a, f"({b} / {a})"))
+            x, ex = nums[i]
+            y, ey = nums[j]
 
-            for result, expr in operations:
-                attempt = solve(
-                    rest + [result],
-                    history + [f"{expr} = {result}"]
-                )
-                if attempt:
-                    return attempt
+            results = []
+            results.append((x + y, f"({ex}+{ey})"))
+            results.append((x - y, f"({ex}-{ey})"))
+            results.append((y - x, f"({ey}-{ex})"))
+            results.append((x * y, f"({ex}*{ey})"))
+
+            if y != 0:
+                results.append((x / y, f"({ex}/{ey})"))
+            if x != 0:
+                results.append((y / x, f"({ey}/{ex})"))
+
+            for v, e in results:
+                r = solve(rest + [(v, e)])
+                if r is not None:
+                    return r
 
     return None
 
+
 def main():
     s = sys.stdin.read().strip()
-    nums = [Fraction(int(c)) for c in s]
 
-    result = solve(nums, [])
-    if result:
-        print("\n".join(result))
-    else:
+    digits = []
+    for c in s:
+        if c.isdigit():
+            digits.append(c)
+
+    if len(digits) != 4:
         print("impossible")
+        return
+
+    nums = []
+    for d in digits:
+        nums.append((Fraction(int(d)), d))
+
+    ans = solve(nums)
+
+    if ans is None:
+        print("impossible")
+    else:
+        print(ans, "= 0")
+
 
 if __name__ == "__main__":
     main()
