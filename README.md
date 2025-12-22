@@ -21,6 +21,7 @@ impossible
 
 # ソフトウェア
 - Python3
+    - 確認済みバージョン: 3.7 ~ 3.10
 
 # テスト環境
 Ubunts 22.04.3 LTS
