@@ -29,6 +29,7 @@ Ubunts 22.04.3 LTS
 # 参考
 - Dash 氏 / 「パズルで鍛えるアルゴリズム力」/ 2022/11/25
   [パズルで鍛えるアルゴリズム力](https://zenn.dev/m01tyan/articles/f9b0d0669fab5c?utm_source=chatgpt.com)
+
   閲覧 2025/12/10~23
 
 # ライセンス
