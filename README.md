@@ -1,5 +1,5 @@
 # Zero Conversion Program
-![test](https://github.com/haruki20051229/robosys2025/actions/wions/workflows/test.yml/badge.svg))
+![test](https://github.com/haruki20051229/robosys2025/actions/workflows/test.yml/badge.svg))
 4桁の数字を標準入力で受け取り,その数字の各桁の数字をそれぞれ一度ずつと四則演算を利用して0を結果として出すコマンドです。
 
 # 使用方法
