@@ -1,0 +1,49 @@
+import sys
+from fractions import Fraction
+
+def solve(nums, history):
+    if len(nums) == 1:
+        if nums[0] == 0:
+            return history
+        return None
+
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            a, b = nums[i], nums[j]
+            rest = [nums[k] for k in range(n) if k != i and k != j]
+
+            operations = [
+                (a + b, f"({a} + {b})"),
+                (a - b, f"({a} - {b})"),
+                (b - a, f"({b} - {a})"),
+                (a * b, f"({a} * {b})")
+            ]
+
+            if b != 0:
+                operations.append((a / b, f"({a} / {b})"))
+            if a != 0:
+                operations.append((b / a, f"({b} / {a})"))
+
+            for result, expr in operations:
+                attempt = solve(
+                    rest + [result],
+                    history + [f"{expr} = {result}"]
+                )
+                if attempt:
+                    return attempt
+
+    return None
+
+def main():
+    s = sys.stdin.read().strip()
+    nums = [Fraction(int(c)) for c in s]
+
+    result = solve(nums, [])
+    if result:
+        print("\n".join(result))
+    else:
+        print("impossible")
+
+if __name__ == "__main__":
+    main()
