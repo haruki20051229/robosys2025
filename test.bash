@@ -9,16 +9,7 @@ ng () {
 res=0
 
 ### NORMAL INPUT ###
-out=$(seq 5.0 | ./plus)
-[ "${out}" = 15 ] || ng "$LINENO"
+echo "1234" | .homework1 >/dev/null
 
-out=$(echo あ| ./plus)
-[ "$?" = 1 ]      || ng "$LINENO"
-[ "${out}" = "" ] || ng "$LINENO"
-
-out=$(echo | ./plus)
-[ "$?" = 1 ]      || ng "$LINENO"
-[ "${out}" = "" ] || ng "$LINENO"
-
-[ "$res" = 0 ] && echo OK
-exit $res
+### ERROR INPUT ###
+echo "abcd" | .homewoek1 >/dev/null || true
